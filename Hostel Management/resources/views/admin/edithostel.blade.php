@@ -38,7 +38,7 @@
       <input type="number" class="form-control" id="capacity" min="0" name="capacity" value="{{$hostel->students_capacity}}">
     </div>
   </div>
-  <input type="number" name="id" value="{{$hostel->id}}" hidden="">
+  <input type="number" name="id" value="{{$hostel->id}}" hidden="" name="hostel_id">
   <button type="submit" class="btn btn-primary">Save</button>
 </form>
 @endsection

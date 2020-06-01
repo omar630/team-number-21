@@ -64,6 +64,22 @@ class SuperAdminController extends Controller
         return view('master.addadmin');
     }
 
+    public function getAddCollege(Request $request){
+        $user = Auth::user();
+        return view('master.addcollege',['user'=>$user]);
+    }
+
+    public function postAddCollege(Request $request){
+        $institute = new Institute;
+        $institute->name = $request->name;
+        $institute->code = $request->code;
+        $institute->address = $request->address;
+        $institute->type = 1;
+        $institute->user_id = $request->user_id;
+        $institute->save();
+        return redirect('/master');
+    }
+
 
     /**
      * Display a listing of the resource.

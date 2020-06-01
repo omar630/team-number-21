@@ -17,9 +17,10 @@ class AdminController extends Controller
     public function home()
     {
         $user = Auth::user();
-        $hostels = Hostel::join('institutes','institutes.id','hostels.institute_id')->get();
+        $hostels = Hostel::join('institutes','institutes.id','hostels.institute_id')->where('hostels.user_id',$user->id)->select('hostels.*','institutes.name','institutes.address','institutes.type','institutes.user_id')->get();
         //return $hostels;
         //$students = 
+        //return $hostels;
         return view('admin.home',['hostels'=>$hostels]);
     }
 
@@ -31,7 +32,7 @@ class AdminController extends Controller
 
     public function saveHostel(Request $request){
         //return $request;
-        $hostel = Hostel::find($request->id)->first();
+        $hostel = Hostel::find($request->hostel_id)->first();
         $hostel->building_name = $request->building_name;
         $hostel->address = $request->address;
         $hostel->room_count = $request->room_count;

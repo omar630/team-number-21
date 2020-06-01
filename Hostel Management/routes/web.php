@@ -36,6 +36,8 @@ Route::group(['middleware' => 'superadmin'], function(){
 	Route::get('addadmin','SuperAdminController@addAdmin')->name('addadmin');
 	Route::get('edithostel','SuperAdminController@edithostel')->name('edithostel');
 	Route::any('adminregister','SuperAdminController@registerAdmin')->name('adminregister');
+	Route::get('addcollege','SuperAdminController@getAddCollege')->name('getaddcollege');
+	Route::post('addcollege','SuperAdminController@postAddCollege')->name('postaddcollege');
 });
 
 Route::group(['middleware' => 'member'], function(){

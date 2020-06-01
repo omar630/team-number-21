@@ -14,6 +14,7 @@
                         Hostels:{{count($hostels)}}
                     @endforeach
                     <br><hr>
+                    <a class="btn btn-primary btn-sm" href="{{route('getaddcollege')}}" role="button">Add College</a>
                     <a class="btn btn-primary btn-sm" href="{{route('addadmin')}}" role="button">Add Admin</a>
                     <a class="btn btn-primary btn-sm" href="{{route('addhostel')}}" role="button">Add Hostel</a>
                 </div>
