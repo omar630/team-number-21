@@ -18,10 +18,10 @@
                         <b>Hostel Name<i class="far fa-building"></i>:</b>{{$hostel->building_name ?? 'not set'}}<br>
                         <b>Address<i class="far fa-address-card"></i>:</b>{{$hostel->address ?? 'not set'}}<br>
                         <b>Rooms: </b>{{$hostel->room_count ?? 'not set'}}<br>
-                        <b>Capacity: </b>{{$hostel->students_capacity*$hostel->room_count ?? 'not set'}}
-                        <br><hr>
+                        <b>Capacity: </b>{{$hostel->students_capacity*$hostel->room_count ?? 'not set'}}<br><br>
                         <a class="btn btn-primary btn-sm" href="{{route('editmyhostel',['id'=>$hostel->id])}}" role="button">Edit</a>
-                        <a class="btn btn-primary btn-sm" href="{{route('addstudents',['id'=>$hostel->id])}}" role="button">Add Students</a>
+                        <a class="btn btn-primary btn-sm" href="{{route('addstudents',['id'=>$hostel->id])}}" role="button">Add Students</a>                        
+                        <br><hr>
                     @endforeach
                 </div>
             </div>

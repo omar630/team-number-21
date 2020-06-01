@@ -47,6 +47,11 @@ class AdminController extends Controller
         $departments = Institute::find($hostel->institute_id)->departments;
         return view('admin.addstudents',['hostel'=>$hostel,'departments'=>$departments]);
     }
+
+    public function savestudent(Request $request){
+        return $request;
+    }
+
     /**
      * Display a listing of the resource.
      *

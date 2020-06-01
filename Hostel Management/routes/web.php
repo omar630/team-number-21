@@ -26,6 +26,7 @@ Route::group(['middleware' => 'admin'], function(){
 	Route::get('editmyhostel','AdminController@editMyHostel')->name('editmyhostel');
 	Route::post('savemyhostel','AdminController@saveHostel')->name('savehostel');
 	Route::any('addstudents','AdminController@getAddStudents')->name('addstudents');
+	Route::post('savestudent','AdminController@saveStudent')->name('savestudent');
 });
 
 Route::group(['middleware' => 'superadmin'], function(){

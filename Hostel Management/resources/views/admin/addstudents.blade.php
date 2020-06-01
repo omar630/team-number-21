@@ -1,10 +1,12 @@
 @extends('admin.layouts.app')
 @section('content')
-<form>
+<form method="post" action="{{route('savestudent')}}">
+	@csrf
+	<input type="number" name="{{$hostel->id}}" value="" placeholder="" hidden="">
   <div class="form-row">
     <div class="col-md-4 mb-3">
-      <label for="name">First name</label>
-      <input type="text" class="form-control" id="name" placeholder="First name Last name" value="" required>
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="name" placeholder="First name Last name" value="" required name="name">
     </div>
     <div class="col-md-4 mb-3">
       <label for="rollno">Roll No.</label>
@@ -12,27 +14,34 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroupPrepend2">#</span>
         </div>
-        <input type="text" class="form-control" id="rollno" placeholder="10 digits roll number" aria-describedby="rollno" required>
+        <input type="text" class="form-control" id="rollno" placeholder="10 digits roll number" aria-describedby="rollno" required name="rollno">
       </div>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="department">Department</label>
-      <select id="department" class="form-control">
+      <select id="department" class="form-control" name="department">
         <option selected>Choose...</option>
         @foreach($departments as $department)
         	<option value="{{$department->id}}">{{$department->short_code}}</option>
         @endforeach
       </select>
     </div>
-    <div class="col-md-3 mb-3">
-      <label for="validationDefault04">State</label>
-      <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
+    <div class="col-md-4 mb-3">
+      <div class="">
+      <label for="mobile">Ph No.</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroupPrepend2"><i class="fas fa-mobile"></i></span>
+        </div>
+        <input type="text" class="form-control" id="rollno" placeholder="10 digits roll number" aria-describedby="rollno" required name="mobile">
+      </div>
+    </div>
     </div>
       <div class="form-group col-md-1.5">
       <label for="year">Year</label>
-      <select id="year" class="form-control">
+      <select id="year" class="form-control" name="year">
         <option value="1-1" selected="">1-1</option>
         <option value="1-2">1-2</option>
         <option value="2-1">2-1</option>
@@ -42,14 +51,6 @@
         <option value="4-1">4-1</option>
         <option value="4-2">4-2</option>        
       </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
-      <label class="form-check-label" for="invalidCheck2">
-        Agree to terms and conditions
-      </label>
     </div>
   </div>
   <button class="btn btn-primary" type="submit">Submit form</button>
