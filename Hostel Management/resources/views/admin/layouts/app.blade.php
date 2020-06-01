@@ -11,10 +11,12 @@
 
     @include('admin.includes.head')    
 </head>
-<<body>
+<body>
 	@yield('css')
 	@include('admin.includes.header')
-	@yield('content')
-	@include('admin.includes.footer')
+    <div class=" container py-4">
+	   @yield('content')
+	   @include('admin.includes.footer')
+    </div>
 	@yield('js')
 </body>

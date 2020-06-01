@@ -17,7 +17,7 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->string('roll_no');
             $table->string('name');
-            $table->string('father _ame');
+            $table->string('father_name');
             $table->foreignId('department_id');
             $table->foreign('department_id')->references('id')->on('departments');
             $table->integer('year');

@@ -9,12 +9,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @include('admin.includes.head')    
+    @include('master.includes.head')    
 </head>
-<<body>
+<body>    
 	@yield('css')
-	@include('admin.includes.header')
-	@yield('content')
-	@include('admin.includes.footer')
-	@yield('js')
+	@include('master.includes.header')
+    <div class=" container py-4">
+    	@yield('content')
+    	@include('master.includes.footer')
+    	@yield('js')
+    </div>
 </body>

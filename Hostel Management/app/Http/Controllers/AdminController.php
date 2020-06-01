@@ -4,16 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
+use App\User;
+use App\Institute;
+use App\Hostel;
+use App\Department;
+
 class AdminController extends Controller
 {
 
 
     public function home()
     {
-        return view('admin.home');
+        $user = Auth::user();
+        $hostels = Hostel::join('Institutes','Institutes.id','hostels.institute_id')->get();
+        //return $hostels;
+        //$students = 
+        return view('admin.home',['hostels'=>$hostels]);
     }
 
+    public function editMyHostel(Request $request){
+        $hostel = Hostel::find($request->id)->join('Institutes','Institutes.id','hostels.institute_id')->first();
+        //return $hostel;
+        return view('admin.edithostel',['hostel'=>$hostel]);
+    }
 
+    public function saveHostel(Request $request){
+        //return $request;
+        $hostel = Hostel::find($request->id)->first();
+        $hostel->building_name = $request->building_name;
+        $hostel->address = $request->address;
+        $hostel->room_count = $request->room_count;
+        $hostel->students_capacity = $request->capacity;
+        $hostel->save();
+        return redirect('/admin');
+    }
+
+    public function getAddStudents(Request $request){
+        $hostel_id = $request->id;
+        $hostel = Hostel::find($hostel_id)->first();
+        //$departments = Department::all();
+        $departments = Institute::find($hostel->institute_id)->departments;
+        return view('admin.addstudents',['hostel'=>$hostel,'departments'=>$departments]);
+    }
     /**
      * Display a listing of the resource.
      *
