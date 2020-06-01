@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
-<form method="post" action="{{route('savestudent')}}">
+<form method="post" action="{{route('savestudent')}}" enctype="multipart/form-data">
 	@csrf
 	<input type="number" name="{{$hostel->id}}" value="" placeholder="" hidden="">
   <div class="form-row">
@@ -53,6 +53,14 @@
       </select>
     </div>
   </div>
+  <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                  <label for="year">Sample file</label>
+                    <div class="col-md-9">
+                    <input type="file" name="sample_file" value="" placeholder="">
+                    </div>
+                </div>
+            </div>
   <button class="btn btn-primary" type="submit">Submit form</button>
 </form>
 @endsection

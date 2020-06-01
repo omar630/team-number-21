@@ -10,6 +10,7 @@ use Auth;
 use App\User;
 use App\Institute;
 use App\Hostel;
+use App\Department;
 
 class SuperAdminController extends Controller
 {
@@ -42,9 +43,16 @@ class SuperAdminController extends Controller
         $institutes = Auth::user()->institutes;
         $user = AUth::user();
         $hostels=[];
-        if(count($institutes)>0)
-            $hostels = Hostel::where('institute_id',$institutes[0]->id)->join('users','users.id','=','hostels.user_id')->get();
-        return view('master.home',['user'=>$user,'institutes'=>$institutes,'hostels'=>$hostels]);
+        $courses=[];
+        $i=0;
+        if(count($institutes)>0){
+            $hostels = Hostel::where('institute_id',$institutes[0]->id)->join('users','users.id','=','hostels.user_id')->get();            
+        }
+        foreach($institutes as $institute){
+            $institute->courses = Institute::find($institute->id)->departments->pluck('short_code');
+        }
+        $departments = Department::all();
+        return view('master.home',['user'=>$user,'institutes'=>$institutes,'hostels'=>$hostels,'courses' => $courses,'departments'=>$departments]);
     }
 
     public function addHostel(){
@@ -80,7 +88,43 @@ class SuperAdminController extends Controller
         return redirect('/master');
     }
 
+    public function saveCourse(Request $request){
+        return $request;
+    }
 
+public function getAddStudents(Request $request){
+        $hostel_id = $request->id;
+        $hostel = Hostel::find($hostel_id)->first();
+        //$departments = Department::all();
+        $departments = Institute::find($hostel->institute_id)->departments;
+        return view('admin.addstudents',['hostel'=>$hostel,'departments'=>$departments]);
+    }
+
+    public function savestudent(Request $request){
+        if($request->hasFile('sample_file')){
+            $path = $request->file('sample_file')->getRealPath();
+            $data = (new FastExcel)->import($path, function ($line) {
+                $department = Department::where('short_code',$line['department'])->first()->pluck('id');
+    return Student::create([
+        'roll_no' => $line['roll_no'],
+        'name' => $line['name'],
+        'father_name' => $line['father_name'],
+        'department_id' => $department[0],
+        'year' => $line['year'],
+        'mobile' => $line['mobile'],
+        'gender' => $line['gender']
+    ]);
+});
+            if($data){
+                return 'inserted';
+            }
+            else{
+                return 'error';
+            }
+   
+        }
+        dd('Request data does not have any files to import.'); 
+    }
     /**
      * Display a listing of the resource.
      *

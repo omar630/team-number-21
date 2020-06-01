@@ -25,8 +25,8 @@ Route::group(['middleware' => 'admin'], function(){
 	Route::any('admin','AdminController@home')->name('admindashboard');
 	Route::get('editmyhostel','AdminController@editMyHostel')->name('editmyhostel');
 	Route::post('savemyhostel','AdminController@saveHostel')->name('savehostel');
-	Route::any('addstudents','AdminController@getAddStudents')->name('addstudents');
-	Route::post('savestudent','AdminController@saveStudent')->name('savestudent');
+	Route::any('addstudents','SuperAdminController@getAddStudents')->name('addstudents');
+	Route::post('savestudent','SuperAdminController@saveStudent')->name('savestudent');
 });
 
 Route::group(['middleware' => 'superadmin'], function(){
@@ -38,6 +38,7 @@ Route::group(['middleware' => 'superadmin'], function(){
 	Route::any('adminregister','SuperAdminController@registerAdmin')->name('adminregister');
 	Route::get('addcollege','SuperAdminController@getAddCollege')->name('getaddcollege');
 	Route::post('addcollege','SuperAdminController@postAddCollege')->name('postaddcollege');
+	Route::any('savecourseforcollege','SuperAdminController@saveCourse')->name('addcoursecollege');
 });
 
 Route::group(['middleware' => 'member'], function(){
