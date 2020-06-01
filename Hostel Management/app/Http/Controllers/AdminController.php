@@ -17,14 +17,14 @@ class AdminController extends Controller
     public function home()
     {
         $user = Auth::user();
-        $hostels = Hostel::join('Institutes','Institutes.id','hostels.institute_id')->get();
+        $hostels = Hostel::join('institutes','institutes.id','hostels.institute_id')->get();
         //return $hostels;
         //$students = 
         return view('admin.home',['hostels'=>$hostels]);
     }
 
     public function editMyHostel(Request $request){
-        $hostel = Hostel::find($request->id)->join('Institutes','Institutes.id','hostels.institute_id')->first();
+        $hostel = Hostel::find($request->id)->join('institutes','institutes.id','hostels.institute_id')->first();
         //return $hostel;
         return view('admin.edithostel',['hostel'=>$hostel]);
     }

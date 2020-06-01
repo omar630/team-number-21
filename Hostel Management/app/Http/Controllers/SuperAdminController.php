@@ -43,7 +43,7 @@ class SuperAdminController extends Controller
         $user = AUth::user();
         $hostels=[];
         if(count($institutes)>0)
-            $hostels = Hostel::where('institute_id',$institutes[0]->id)->join('users','users.id','=','Hostels.user_id')->get();
+            $hostels = Hostel::where('institute_id',$institutes[0]->id)->join('users','users.id','=','hostels.user_id')->get();
         return view('master.home',['user'=>$user,'institutes'=>$institutes,'hostels'=>$hostels]);
     }
 
